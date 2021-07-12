@@ -24,6 +24,8 @@ const toDoArr = [
 const list = document.getElementById('list')
 
 const render = (arr) => {
+    list.textContent = ''
+
     for (let i = 0; i < arr.length; i++) {
         const newItem = document.createElement('div')
         newItem.textContent = arr[i].text
@@ -32,3 +34,8 @@ const render = (arr) => {
 }
 
 render(toDoArr)
+
+const remove = (i) => {
+    toDoArr.splice(i, 1)
+    render(toDoArr)
+}
