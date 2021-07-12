@@ -39,3 +39,8 @@ const remove = (i) => {
     toDoArr.splice(i, 1)
     render(toDoArr)
 }
+
+const addToDo = (text) => {
+    toDoArr.push({text, done: false})
+    render(toDoArr)
+}
