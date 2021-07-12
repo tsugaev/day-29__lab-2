@@ -1,4 +1,4 @@
-const toDoList = [
+const toDoArr = [
     {
         text: 'Новое дело 1',
         done: false
@@ -12,11 +12,23 @@ const toDoList = [
         done: false
     },
     {
-        text: 'Новое дело 2',
+        text: 'Новое дело 4',
         done: false
     },
     {
-        text: 'Новое дело 3',
+        text: 'Новое дело 5',
         done: false
     }
 ]
+
+const list = document.getElementById('list')
+
+const render = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        const newItem = document.createElement('div')
+        newItem.textContent = arr[i].text
+        list.append(newItem)
+    }
+}
+
+render(toDoArr)
