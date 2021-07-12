@@ -20,27 +20,41 @@ const toDoArr = [
         done: false
     }
 ]
-
+// находим элементы
 const input = document.getElementById('input')
 const list = document.getElementById('list')
-const addBtn = document.getElementById('add')
-
+const form = document.getElementById('form')
+// основная функция, которая создает нашу верстку
 const render = (arr) => {
-    list.textContent = ''
+    list.textContent = '' // при каждом вызове функции очищаем div
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) { // цикл для перебора массива
+        // создаем элементы для списка
         const newItem = document.createElement('div')
+        const checkbox = document.createElement('input')
         const deleteBtn = document.createElement('img')
+        const span = document.createElement('span')
 
-        newItem.textContent = arr[i].text
+        span.textContent = arr[i].text
+
+        newItem.append(span)
         newItem.classList.add('list-item')
-        deleteBtn.src = 'icons/delete.svg'
 
+        checkbox.type = 'checkbox'
+        newItem.prepend(checkbox)
+
+        deleteBtn.src = 'icons/delete.svg'
         newItem.append(deleteBtn)
+
         list.append(newItem)
 
-        deleteBtn.addEventListener('click', (e) => {
-            e.target.parentNode.remove()
+        deleteBtn.addEventListener('click', () => {
+            remove(i)
+        })
+
+        checkbox.addEventListener('click', () => {
+            checkTodo(i)
+            span.classList.toggle('checked')
         })
     }
 }
@@ -52,12 +66,15 @@ const remove = (i) => {
     render(toDoArr)
 }
 
-
-
-const addToDo = () => {
-    toDoArr.push({text: input.value, done: false})
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    if (input.value !== '') toDoArr.push({text: input.value, done: false})
     render(toDoArr)
     input.value = ''
+})
+
+const checkTodo = (i) => {
+    toDoArr[i].done = !toDoArr[i].done
 }
 
-addBtn.addEventListener('click', addToDo)
+// комментш язъя йиш яц, со витиш!
