@@ -21,15 +21,27 @@ const toDoArr = [
     }
 ]
 
+const input = document.getElementById('input')
 const list = document.getElementById('list')
+const addBtn = document.getElementById('add')
 
 const render = (arr) => {
     list.textContent = ''
 
     for (let i = 0; i < arr.length; i++) {
         const newItem = document.createElement('div')
+        const deleteBtn = document.createElement('img')
+
         newItem.textContent = arr[i].text
+        newItem.classList.add('list-item')
+        deleteBtn.src = 'icons/delete.svg'
+
+        newItem.append(deleteBtn)
         list.append(newItem)
+
+        deleteBtn.addEventListener('click', (e) => {
+            e.target.parentNode.remove()
+        })
     }
 }
 
@@ -40,7 +52,12 @@ const remove = (i) => {
     render(toDoArr)
 }
 
-const addToDo = (text) => {
-    toDoArr.push({text, done: false})
+
+
+const addToDo = () => {
+    toDoArr.push({text: input.value, done: false})
     render(toDoArr)
+    input.value = ''
 }
+
+addBtn.addEventListener('click', addToDo)
